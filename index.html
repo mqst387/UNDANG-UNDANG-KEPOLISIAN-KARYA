@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Police Law Calculator</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+margin:0;
+}
+
+header{
+background:#020617;
+padding:20px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:30px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+cursor:pointer;
+}
+
+.card:hover{
+background:#334155;
+}
+
+.panel{
+background:#020617;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+button{
+background:#38bdf8;
+border:none;
+padding:8px;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🚓 POLICE LAW CALCULATOR
+</header>
+
+<div class="container">
+
+<div class="card" onclick="addCase('Penculikan',60,5000)">
+<h3>Penculikan</h3>
+<p>Penjara 60 menit</p>
+</div>
+
+<div class="card" onclick="addCase('Perampokan',45,3000)">
+<h3>Perampokan</h3>
+<p>Penjara 45 menit</p>
+</div>
+
+<div class="card" onclick="addCase('Pembunuhan',120,10000)">
+<h3>Pembunuhan</h3>
+<p>Penjara 120 menit</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Daftar Kasus</h2>
+
+<div id="caseList"></div>
+
+<p>Total Penjara: <span id="time">0</span> menit</p>
+<p>Total Denda: $<span id="fine">0</span></p>
+
+</div>
+
+<script>
+
+let totalTime = 0
+let totalFine = 0
+
+function addCase(name,time,fine){
+
+let list = document.getElementById("caseList")
+
+let div = document.createElement("div")
+div.innerHTML = name + " <button onclick='removeCase(this,"+time+","+fine+")'>hapus</button>"
+
+list.appendChild(div)
+
+totalTime += time
+totalFine += fine
+
+update()
+
+}
+
+function removeCase(btn,time,fine){
+
+btn.parentElement.remove()
+
+totalTime -= time
+totalFine -= fine
+
+update()
+
+}
+
+function update(){
+
+document.getElementById("time").innerText = totalTime
+document.getElementById("fine").innerText = totalFine
+
+}
+
+</script>
+
+</body>
+</html>
